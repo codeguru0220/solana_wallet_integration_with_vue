@@ -2,13 +2,9 @@
 
 Integrates Solana wallets in your Vue 3 applications.
 
-⚡️ [View demo](https://solana-wallets-vue-demo.netlify.app/) / [Browse demo code](./example)
-
-<img width="1230" alt="solana-wallets-vue" src="https://user-images.githubusercontent.com/3642397/152684955-079b4505-a7bb-4be7-976b-a0a5a59acf92.png">
+reference: [View demo](https://solana-wallets-vue-demo.netlify.app/) / [Browse demo code](./example)
 
 ## Installation
-
-To get started, you'll need to install the `solana-wallets-vue` npm package as well as the wallets adapters provided by Solana.
 
 ```shell
 npm install solana-wallets-vue @solana/wallet-adapter-wallets
