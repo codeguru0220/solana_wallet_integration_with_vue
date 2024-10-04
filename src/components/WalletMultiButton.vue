@@ -6,76 +6,7 @@ import WalletConnectButton from "./WalletConnectButton.vue";
 import WalletIcon from "./WalletIcon.vue";
 import WalletModalProvider from "./WalletModalProvider.vue";
 
-export default defineComponent({
-  components: {
-    WalletConnectButton,
-    WalletIcon,
-    WalletModalProvider,
-  },
-  props: {
-    featured: { type: Number, default: 3 },
-    container: { type: String, default: "body" },
-    logo: String,
-    dark: Boolean,
-  },
-  setup(props) {
-    const { featured, container, logo, dark } = toRefs(props);
-    const { publicKey, wallet, disconnect } = useWallet();
 
-    const dropdownPanel = ref<HTMLElement>();
-    const dropdownOpened = ref(false);
-    const openDropdown = () => {
-      dropdownOpened.value = true;
-    };
-    const closeDropdown = () => {
-      dropdownOpened.value = false;
-    };
-    onClickOutside(dropdownPanel, closeDropdown);
-
-    const publicKeyBase58 = computed(() => publicKey.value?.toBase58());
-    const publicKeyTrimmed = computed(() => {
-      if (!wallet.value || !publicKeyBase58.value) return null;
-      return (
-        publicKeyBase58.value.slice(0, 4) +
-        ".." +
-        publicKeyBase58.value.slice(-4)
-      );
-    });
-
-    const {
-      copy,
-      copied: addressCopied,
-      isSupported: canCopy,
-    } = useClipboard();
-    const copyAddress = () =>
-      publicKeyBase58.value && copy(publicKeyBase58.value);
-
-    // Define the bindings given to scoped slots.
-    const scope = {
-      featured,
-      container,
-      logo,
-      dark,
-      wallet,
-      publicKey,
-      publicKeyTrimmed,
-      publicKeyBase58,
-      canCopy,
-      addressCopied,
-      dropdownPanel,
-      dropdownOpened,
-      openDropdown,
-      closeDropdown,
-      copyAddress,
-      disconnect,
-    };
-
-    return {
-      scope,
-      ...scope,
-    };
-  },
-});
 </script>
 
 <template>
