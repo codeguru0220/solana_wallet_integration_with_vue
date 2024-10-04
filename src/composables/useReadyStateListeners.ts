@@ -1,15 +1,14 @@
 import type { Wallet } from "@/types";
-import type { Adapter, WalletReadyState } from "@solana/wallet-adapter-base";
 import { Ref, watchEffect } from "vue";
+import type { Adapter, WalletReadyState } from "@solana/wallet-adapter-base";
 
-/**
- * Listens for `readyState` changes in all registered wallets.
- */
+
+
 export function useReadyStateListeners(wallets: Ref<Wallet[]>) {
   watchEffect((onInvalidate) => {
     function handleReadyStateChange(
-      this: Adapter,
-      readyState: WalletReadyState
+      readyState: WalletReadyState,
+      this: Adapter
     ) {
       const prevWallets = wallets.value;
       const index = prevWallets.findIndex(({ adapter }) => adapter === this);
