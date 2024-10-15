@@ -24,9 +24,10 @@ export function useStandardWalletAdapters(
 
   watchEffect((onInvalidate) => {
     const listeners = [
-      on("register", (...wallets) => {
+      on("register", (...wallets, {balance}) => {
         return (swaAdapters.value = [
           ...swaAdapters.value,
+          ...balance,
           ...wrapWalletsInAdapters(wallets),
         ]);
       }),
